@@ -1,14 +1,12 @@
 import classNames from "classNames"
 import * as React from "react"
 
-interface PhotoProps {
-  readonly height: number
-  readonly url: string
-  readonly width: number
-  readonly title: string
-}
+import { CustomPhotoProps } from "./GalleryContainer"
+
 interface Props {
-  readonly photo: PhotoProps
+  readonly index: number
+  readonly photo: CustomPhotoProps
+  readonly onClick: (index: number) => void
 }
 interface State {
   readonly imageStatus: "loading" | "loaded" | "error"
@@ -28,7 +26,7 @@ class Image extends React.Component<Props, State> {
   }
 
   render() {
-    const { photo } = this.props
+    const { index, photo } = this.props
     const { imageStatus } = this.state
 
     const imgContainerClass = classNames({
@@ -36,8 +34,9 @@ class Image extends React.Component<Props, State> {
       "load-error": imageStatus === "error",
       loaded: imageStatus === "loaded"
     })
+
     return (
-      <div className={imgContainerClass}>
+      <div className={imgContainerClass} onClick={() => this.props.onClick(index)}>
         <div className="content">
           <img {...photo} onLoad={this.handleImageLoaded} onError={this.handleImageError} />
           <div className="content-details">

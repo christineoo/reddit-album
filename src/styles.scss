@@ -8,7 +8,7 @@ nav {
   width: 100%;
   margin: 0;
   top: 0;
-  background: #757272;
+  background: #1e1e1e;
   position: fixed;
   z-index: 1;
 }
@@ -36,6 +36,7 @@ li {
     padding: 5px;
     &.active {
       color: #d4e256;
+      border-bottom: 2px solid #d4e256;
     }
     &:hover {
       color: #ebd4aa;
@@ -44,7 +45,15 @@ li {
 }
 
 .gallery {
-  margin-top: 90px;
+  .loading-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .react-photo-gallery--gallery {
+    margin-top: 90px;
+  }
 }
 
 .react-photo-gallery--gallery {
@@ -62,6 +71,7 @@ li {
 
     &.loaded {
       margin: 0 2px;
+      background-color: #fff;
     }
 
     &.loaded img {
@@ -77,7 +87,7 @@ li {
       bottom: 0%;
       width: 100%;
       opacity: 0;
-      background-color: rgba(0, 0, 0, 0.5);
+      background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.5));
       margin-bottom: 4px;
       margin-top: 25px;
       white-space: nowrap;

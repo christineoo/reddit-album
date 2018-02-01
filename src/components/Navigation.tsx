@@ -6,6 +6,26 @@ interface Props {
   readonly to: string
   readonly children: React.ReactChild
 }
+interface Option {
+  readonly value: string
+  readonly label: string
+}
+
+export const SUBREDDITS: ReadonlyArray<Option> = [
+  { value: "itookapicture", label: "Photography" },
+  { value: "pic", label: "General" },
+  { value: "aww", label: "Aww" },
+  { value: "foodporn", label: "Food" },
+  { value: "DessertPorn", label: "Dessert" },
+  { value: "cityporn", label: "City" },
+  { value: "JapanPics", label: "Japan" },
+  { value: "EarthPorn", label: "Earth" },
+  { value: "lakeporn", label: "Lakes" },
+  { value: "RoomPorn", label: "Room" },
+  { value: "waterporn", label: "Water" },
+  { value: "WinterPorn", label: "Winter" },
+  { value: "ImaginaryLeviathans", label: "Art" },
+]
 
 const NavLink = (props: Props) => (
   <Link
@@ -21,21 +41,14 @@ const NavLink = (props: Props) => (
 )
 
 const Navigation = () => {
-  const navigationOptions: ReadonlyArray<any> = [
-    { value: "pic", label: "General" },
-    { value: "earthporn", label: "Earth" },
-    { value: "waterporn", label: "Water" },
-    { value: "cityporn", label: "City" },
-    { value: "foodporn", label: "Food" },
-    { value: "aww", label: "Aww" },
-    { value: "lakeporn", label: "Lakes" }
-  ]
   return (
     <nav>
       <ul>
-        {navigationOptions.map((option) => (
+        {SUBREDDITS.map((option) => (
           <li key={option.value}>
-            <NavLink to={`/r/${option.value}`}>{option.label}</NavLink>
+            <NavLink data-testid={option.value} to={`/r/${option.value}`}>
+              {option.label}
+            </NavLink>
           </li>
         ))}
       </ul>
