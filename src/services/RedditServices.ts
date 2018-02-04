@@ -4,7 +4,7 @@ export default class RedditServices {
   }
 
   static urlPath(subreddit?: string, after?: string) {
-    const ROOT_PATH = "http://www.reddit.com"
+    const ROOT_PATH = "https://www.reddit.com"
     const DEFAULT_SUBREDDIT = "pic"
     const DEFAULT_PATH = `${ROOT_PATH}/r/${DEFAULT_SUBREDDIT}.json`
     return subreddit && after

@@ -18,7 +18,7 @@ const config = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/",
+    publicPath: devMode ? "/" : "/reddit-album",
     chunkFilename: '[name].[chunkhash].chunk.js'
     // path: __dirname + "/dist",
     // publicPath: "/dist"
