@@ -1,7 +1,7 @@
 import { RouteComponentProps } from "@reach/router"
 import * as React from "react"
 
-type Props = RouteComponentProps<{ subreddit: string }>
+type Props = RouteComponentProps<{ readonly subreddit: string }>
 
 class Gallery extends React.Component<Props> {
   render() {

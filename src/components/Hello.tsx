@@ -3,8 +3,8 @@ import * as React from "react"
 import "./Hello.scss"
 
 interface Props {
-  compiler: string
-  framework: string
+  readonly compiler: string
+  readonly framework: string
 }
 
 export const Hello = ({ compiler, framework }: Props) => {

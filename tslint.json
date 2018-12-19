@@ -1,9 +1,17 @@
 {
-  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier", "tslint-immutable"],
   "rules": {
     "interface-name": [true, "never-prefix"],
     "member-access": [true, "no-public"],
     "no-implicit-dependencies": false,
-    "ordered-imports": [true, { "grouped-imports": true }]
+    "ordered-imports": [true, { "grouped-imports": true }],
+
+    // Recommended built-in rules
+    "no-var-keyword": true,
+
+    // Immutability rules
+    "readonly-keyword": true,
+    "readonly-array": true,
+    "no-object-mutation": true
   }
 }
