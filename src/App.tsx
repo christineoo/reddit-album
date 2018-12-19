@@ -1,5 +1,6 @@
 import { Link, Router } from "@reach/router"
 import * as React from "react"
+
 import Gallery from "./components/Gallery"
 
 const App = () => (

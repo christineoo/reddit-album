@@ -2,6 +2,8 @@
   "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
   "rules": {
     "interface-name": [true, "never-prefix"],
-    "no-implicit-dependencies": false
+    "member-access": [true, "no-public"],
+    "no-implicit-dependencies": false,
+    "ordered-imports": [true, { "grouped-imports": true }]
   }
 }
