@@ -1,0 +1,90 @@
+@import "~normalize.css/normalize";
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+nav {
+  width: 100%;
+  margin: 0;
+  top: 0;
+  background: #24243f;
+  color: #ccc;
+  position: fixed;
+  z-index: 1;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+}
+
+li {
+  height: 100%;
+  flex: 1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  a {
+    color: #dae2e5;
+    text-decoration: none;
+  }
+}
+
+.gallery {
+  margin-top: 50px;
+}
+
+.react-photo-gallery--gallery {
+  .img-container {
+    background-color: #f4f4f4;
+    margin: 2px 2px;
+    position: relative;
+
+    img {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    &.loaded {
+      margin: 0 2px;
+    }
+
+    &.loaded img {
+      opacity: 1;
+    }
+
+    .content-details {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      left: 50%;
+      opacity: 0;
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      -webkit-transition: all 0.3s ease-in-out 0s;
+      -moz-transition: all 0.3s ease-in-out 0s;
+      transition: all 0.3s ease-in-out 0s;
+    }
+    .content {
+      &:hover {
+        .content-details {
+          background-color: rgba(0, 0, 0, 0.5);
+          bottom: 0%;
+          left: 50%;
+          opacity: 1;
+          p {
+            color: #fff;
+            padding: 0 2px;
+          }
+        }
+      }
+    }
+  }
+}

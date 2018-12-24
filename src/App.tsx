@@ -1,21 +1,10 @@
-import { Link, Router } from "@reach/router"
 import * as React from "react"
 
-import Gallery from "./components/Gallery"
+import "./styles.scss"
 
-const App = () => (
-  <>
-    <nav>
-      <Link to="r/pic">General</Link>
-      <Link to="r/earthporn">Earth</Link>
-      <Link to="r/waterporn">Water</Link>
-      <Link to="r/cityporn">City</Link>
-    </nav>
-
-    <Router>
-      <Gallery path="r/:subreddit" />
-    </Router>
-  </>
-)
+interface Props {
+  readonly children: React.ReactChild
+}
+const App = ({ children }: Props) => <>{children}</>
 
 export default App

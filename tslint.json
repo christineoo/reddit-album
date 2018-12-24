@@ -5,6 +5,7 @@
     "member-access": [true, "no-public"],
     "no-implicit-dependencies": false,
     "ordered-imports": [true, { "grouped-imports": true }],
+    "jsx-no-lambda": false,
 
     // Recommended built-in rules
     "no-var-keyword": true,

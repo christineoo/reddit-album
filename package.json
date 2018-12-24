@@ -16,6 +16,7 @@
     "tslint": "tslint --project tsconfig.json --config tslint.json"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.6",
     "@types/html-webpack-plugin": "^3.2.0",
     "@types/jest": "^23.3.9",
     "@types/lodash-es": "^4.17.1",
@@ -48,8 +49,11 @@
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
+    "classnames": "^2.2.6",
     "lodash-es": "^4.17.11",
+    "normalize.css": "^8.0.1",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "react-photo-gallery": "^6.2.2"
   }
 }
