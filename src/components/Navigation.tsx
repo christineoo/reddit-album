@@ -1,4 +1,5 @@
 import { Link } from "@reach/router"
+import classNames from "classNames"
 import * as React from "react"
 
 interface Props {
@@ -10,12 +11,10 @@ const NavLink = (props: Props) => (
   <Link
     {...props}
     getProps={({ isCurrent }) => {
-      // the object returned here is passed to the
-      // anchor element's props
       return {
-        style: {
-          color: isCurrent && "red"
-        }
+        className: classNames({
+          active: isCurrent
+        })
       }
     }}
   />

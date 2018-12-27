@@ -11,10 +11,10 @@ interface Props {
   readonly photo: PhotoProps
 }
 interface State {
-  readonly imageStatus: "loading" | "loaded"
+  readonly imageStatus: "loading" | "loaded" | "error"
 }
 
-class Image extends React.Component<Props> {
+class Image extends React.Component<Props, State> {
   readonly state: State = {
     imageStatus: "loading"
   }
@@ -23,21 +23,25 @@ class Image extends React.Component<Props> {
     this.setState({ imageStatus: "loaded" })
   }
 
+  readonly handleImageError = () => {
+    this.setState({ imageStatus: "error" })
+  }
+
   render() {
-    console.log("props: ", this.props)
     const { photo } = this.props
     const { imageStatus } = this.state
 
     const imgContainerClass = classNames({
       "img-container": true,
+      "load-error": imageStatus === "error",
       loaded: imageStatus === "loaded"
     })
     return (
       <div className={imgContainerClass}>
         <div className="content">
-          <img {...photo} onLoad={this.handleImageLoaded} />
+          <img {...photo} onLoad={this.handleImageLoaded} onError={this.handleImageError} />
           <div className="content-details">
-            <p>{photo.title}</p>
+            <span>{photo.title}</span>
           </div>
         </div>
       </div>
