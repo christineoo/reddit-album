@@ -6,7 +6,8 @@ const options = {
   contentBase: config.output.path,
   hot: true,
   host: "localhost",
-  historyApiFallback: true
+  historyApiFallback: true,
+  overlay: true
 };
 
 webpackDevServer.addDevServerEntrypoints(config, options);
