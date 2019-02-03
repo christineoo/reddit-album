@@ -1,4 +1,5 @@
-import { Link, Redirect, RouteComponentProps, Router } from "@reach/router"
+import { createHistory, Link, LocationProvider, Redirect, RouteComponentProps, Router } from "@reach/router"
+import { createHashSource } from "reach-router-hash-history"
 import * as React from "react"
 
 import GalleryContainer from "./components/GalleryContainer"
@@ -12,10 +13,14 @@ export const NotFound = ({  }: Props) => (
   </div>
 )
 
+const history = createHistory(createHashSource())
+
 export const App = () => (
-  <Router>
-    <Redirect noThrow={true} from="/" to="r/itookapicture" />
-    <GalleryContainer path="r/:subreddit" />
-    <NotFound default={true} />
-  </Router>
+  <LocationProvider history={history}>
+    <Router>
+      <Redirect noThrow={true} from="/" to="r/itookapicture" />
+      <GalleryContainer path="r/:subreddit" />
+      <NotFound default={true} />
+    </Router>
+  </LocationProvider>
 )

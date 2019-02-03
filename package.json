@@ -63,6 +63,7 @@
     "classnames": "^2.2.6",
     "lodash-es": "^4.17.11",
     "normalize.css": "^8.0.1",
+    "reach-router-hash-history": "^0.0.3",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-images": "^0.5.19",
