@@ -24,7 +24,7 @@ export const SUBREDDITS: ReadonlyArray<Option> = [
   { value: "RoomPorn", label: "Room" },
   { value: "waterporn", label: "Water" },
   { value: "WinterPorn", label: "Winter" },
-  { value: "ImaginaryLeviathans", label: "Art" },
+  { value: "ImaginaryLeviathans", label: "Art" }
 ]
 
 const NavLink = (props: Props) => (
@@ -56,4 +56,4 @@ const Navigation = () => {
   )
 }
 
-export default Navigation
+export default React.memo(Navigation)
