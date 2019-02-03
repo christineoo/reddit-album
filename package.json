@@ -12,6 +12,7 @@
   "engines": {
     "yarn": ">=1.10"
   },
+  "homepage": "https://christineoo.github.io/reddit-album/",
   "scripts": {
     "clean": "rimraf dist",
     "start": "node server.js",
