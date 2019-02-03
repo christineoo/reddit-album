@@ -60,5 +60,8 @@
     "react-images": "^0.5.19",
     "react-loading": "^2.0.3",
     "react-photo-gallery": "^6.3.1"
+  },
+  "resolutions": {
+    "terser": "3.14.1"
   }
 }
