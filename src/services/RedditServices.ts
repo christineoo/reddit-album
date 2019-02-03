@@ -1,11 +1,16 @@
 export default class RedditServices {
-  static readonly DEFAULT_PATH = "http://www.reddit.com/r/pic.json"
+  static fetchData(subreddit?: string, after?: string) {
+    return fetch(this.urlPath(subreddit, after))
+  }
 
-  static async fetchData(url?: string) {
-    const response = await fetch(url ? url : this.DEFAULT_PATH)
-
-    const res = await response.json()
-
-    return res
+  static urlPath(subreddit?: string, after?: string) {
+    const ROOT_PATH = "http://www.reddit.com"
+    const DEFAULT_SUBREDDIT = "pic"
+    const DEFAULT_PATH = `${ROOT_PATH}/r/${DEFAULT_SUBREDDIT}.json`
+    return subreddit && after
+      ? `${ROOT_PATH}/r/${subreddit}.json?after=${after}`
+      : subreddit
+      ? `${ROOT_PATH}/r/${subreddit}.json`
+      : DEFAULT_PATH
   }
 }

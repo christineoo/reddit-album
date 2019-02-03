@@ -4,11 +4,12 @@ import Lightbox from "react-images"
 import ReactLoading from "react-loading"
 import Gallery, { GalleryProps, PhotoProps } from "react-photo-gallery"
 
+import { NotFound } from "../App"
 import RedditServices from "../services/RedditServices"
 import { filteredData } from "../utils/dataFilterHelper"
 
 import Image from "./Image"
-import Navigation from "./Navigation"
+import Navigation, { SUBREDDITS } from "./Navigation"
 
 type Props = RouteComponentProps<{ readonly subreddit: string }>
 
@@ -31,6 +32,7 @@ interface State {
   readonly isFetching: boolean
   readonly isFetchingMoreData: boolean
   readonly lightboxIsOpen: boolean
+  readonly isValidSubreddit: boolean
 }
 
 export interface CustomPhotoProps extends PhotoProps {
@@ -47,18 +49,24 @@ class GalleryContainer extends React.Component<Props> {
     isBottomReached: false,
     isFetching: false,
     isFetchingMoreData: false,
-    lightboxIsOpen: false
+    lightboxIsOpen: false,
+    isValidSubreddit: false
   }
 
   async fetchData(subreddit?: string) {
-    const url = subreddit ? `http://www.reddit.com/r/${subreddit}.json` : "http://www.reddit.com/r/pic.json"
-    this.setState({ isFetching: true })
+    const isValidSubreddit = !!SUBREDDITS.find((sub) => sub.value === subreddit)
+    this.setState({ isFetching: true, isValidSubreddit })
+
+    if (!isValidSubreddit) {
+      this.setState({ isFetching: false })
+      return
+    }
     try {
-      const response = await fetch(url)
+      const response = await RedditServices.fetchData(subreddit)
       if (!response.ok) {
         throw Error("fetch error")
       }
-      const res = await RedditServices.fetchData(url)
+      const res = await response.json()
       const imageData = filteredData(res.data.children)
       this.setState({
         after: res.data.after,
@@ -72,9 +80,9 @@ class GalleryContainer extends React.Component<Props> {
 
   componentDidMount() {
     const { subreddit } = this.props
-    window.addEventListener("scroll", this.handleScroll)
-
     this.fetchData(subreddit)
+
+    window.addEventListener("scroll", this.handleScroll)
   }
 
   componentWillUnmount() {
@@ -99,17 +107,14 @@ class GalleryContainer extends React.Component<Props> {
       return
     }
 
-    const url = subreddit
-      ? `http://www.reddit.com/r/${subreddit}.json?after=${after}`
-      : `http://www.reddit.com/r/pic.json?after=${after}`
     this.setState({ isFetchingMoreData: true })
 
     try {
-      const response = await fetch(url)
+      const response = await RedditServices.fetchData(subreddit, after)
       if (!response.ok) {
         throw Error("fetch error")
       }
-      const res = await RedditServices.fetchData(url)
+      const res = await response.json()
       const moreData = filteredData(res.data.children)
       this.setState({
         after: res.data.after,
@@ -174,8 +179,12 @@ class GalleryContainer extends React.Component<Props> {
   }
 
   render() {
-    const { currentImage, data, lightboxIsOpen, isFetching } = this.state
+    const { currentImage, data, lightboxIsOpen, isFetching, isValidSubreddit } = this.state
+    const LoadingBars = () => <ReactLoading type="bars" color="#b9c8d0" />
 
+    if (!isValidSubreddit) {
+      return <NotFound />
+    }
     if (data.length === 0 && !isFetching) {
       return <h1>No photos...</h1>
     }
@@ -190,14 +199,12 @@ class GalleryContainer extends React.Component<Props> {
       return { caption: d.title, height: d.height, src: d.src, title: d.title, width: d.width, key: index }
     })
 
-    const LoadingComponent = () => <ReactLoading type="bars" color="#b9c8d0" />
-
     return (
       <div className="gallery">
         <Navigation />
         {isFetching ? (
           <div className="loading-container">
-            <LoadingComponent />
+            <LoadingBars />
           </div>
         ) : (
           <>
@@ -209,7 +216,7 @@ class GalleryContainer extends React.Component<Props> {
               onClickPrev={this.gotoPrevious}
               onClickNext={this.gotoNext}
               onClose={this.closeLightbox}
-              spinner={LoadingComponent}
+              spinner={LoadingBars}
             />
           </>
         )}
