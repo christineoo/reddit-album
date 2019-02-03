@@ -6,6 +6,8 @@
     "no-implicit-dependencies": false,
     "ordered-imports": [true, { "grouped-imports": true }],
     "jsx-no-lambda": false,
+    "object-literal-sort-keys": false,
+    "member-ordering": false,
 
     // Recommended built-in rules
     "no-var-keyword": true,
