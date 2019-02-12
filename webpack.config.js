@@ -1,25 +1,25 @@
 // @ts-check
 
-const path = require("path");
-const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require("path")
+const webpack = require("webpack")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
-const devMode = process.env.NODE_ENV !== "production";
-const isProdMode = process.env.NODE_ENV === "production";
+const devMode = process.env.NODE_ENV !== "production"
+const isProdMode = process.env.NODE_ENV === "production"
 
 /**
  * @type {import('webpack').Configuration}
  */
 
 const config = {
-  mode: devMode ? "development" : 'production',
+  mode: devMode ? "development" : "production",
   entry: ["./src/index.tsx"],
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
     publicPath: devMode ? "/" : "/reddit-album",
-    chunkFilename: '[name].[chunkhash].chunk.js'
+    chunkFilename: "[name].[chunkhash].chunk.js"
   },
   // Enable sourcemaps for debugging webpack's output.
   devtool: devMode ? "cheap-module-eval-source-map" : "hidden-source-map",
@@ -36,11 +36,7 @@ const config = {
       { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
       {
         test: /\.(sa|sc|c)ss$/,
-        use: [
-          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
-          "css-loader",
-          "sass-loader"
-        ]
+        use: [devMode ? "style-loader" : MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
       }
     ]
   },
@@ -73,7 +69,7 @@ const config = {
   //     react: "React",
   //     "react-dom": "ReactDOM"
   //   }
-};
+}
 
 // Automatically split vendor and commons
 // https://twitter.com/wSokra/status/969633336732905474
@@ -84,10 +80,10 @@ if (isProdMode) {
       maxSize: 50000,
       minSize: 10000,
       maxAsyncRequests: Infinity,
-      maxInitialRequests: Infinity,
+      maxInitialRequests: Infinity
     },
     runtimeChunk: true
   }
 }
 
-module.exports = config;
+module.exports = config
