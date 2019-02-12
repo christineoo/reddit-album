@@ -37,9 +37,6 @@ module.exports = {
   ],
   globals: {
     window: {},
-    'ts-jest': {
-      tsConfig: 'tsconfig.test.json',
-    },
   },
   reporters: [
     'default',
