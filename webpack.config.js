@@ -20,8 +20,6 @@ const config = {
     path: path.resolve(__dirname, "dist"),
     publicPath: devMode ? "/" : "/reddit-album",
     chunkFilename: '[name].[chunkhash].chunk.js'
-    // path: __dirname + "/dist",
-    // publicPath: "/dist"
   },
   // Enable sourcemaps for debugging webpack's output.
   devtool: devMode ? "cheap-module-eval-source-map" : "hidden-source-map",
@@ -63,7 +61,7 @@ const config = {
     }),
     new MiniCssExtractPlugin({
       filename: devMode ? "[name].css" : "[name].[hash].css",
-      chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
+      chunkFilename: devMode ? "[id].css" : "[name].[hash].css"
     })
   ]
 
@@ -77,15 +75,19 @@ const config = {
   //   }
 };
 
-// if (isProdMode) {
-//   config.optimization = {
-//     splitChunks: {
-//       chunks: "all",
-//       name: "vendors"
-//     },
-//     runtimeChunk: true
-//   }
-
-// }
+// Automatically split vendor and commons
+// https://twitter.com/wSokra/status/969633336732905474
+// https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
+if (isProdMode) {
+  config.optimization = {
+    splitChunks: {
+      maxSize: 50000,
+      minSize: 10000,
+      maxAsyncRequests: Infinity,
+      maxInitialRequests: Infinity,
+    },
+    runtimeChunk: true
+  }
+}
 
 module.exports = config;
