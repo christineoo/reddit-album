@@ -185,9 +185,6 @@ class GalleryContainer extends React.Component<Props> {
     if (!isValidSubreddit) {
       return <NotFound />
     }
-    if (data.length === 0 && !isFetching) {
-      return <h1>No photos...</h1>
-    }
 
     // src is from a lower resolution image
     const photos = data.map((d: ImageData, index: number) => {
@@ -205,6 +202,10 @@ class GalleryContainer extends React.Component<Props> {
         {isFetching ? (
           <div className="loading-container">
             <LoadingBars />
+          </div>
+        ) : data.length === 0 ? (
+          <div className="centered-container">
+            <h1>No photos...</h1>
           </div>
         ) : (
           <>
