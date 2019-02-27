@@ -3,11 +3,14 @@ import { pick } from "lodash-es"
 import { ImageData } from "../components/GalleryContainer"
 
 export const filteredData = (res: any) => {
-  const dataWithImages = res.filter((child: any) => child.data.url.match(/\.(jpeg|jpg|gif|png)$/) != null)
+  const dataWithImages = res.filter(
+    (child: any) => child.data.url.match(/\.(jpeg|jpg|gif|png)$/) != null && !!child.data.preview
+  )
 
   const imageData: ImageData = dataWithImages.map(
     (item: any): ImageData => {
       let dimension = { height: 0, width: 0 }
+      console.log("item.data: ", item.data)
       const resolutionLength = item.data.preview.images[0].resolutions.length
       let urlOfLowerResolution = ""
 
