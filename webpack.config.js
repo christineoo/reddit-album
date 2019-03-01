@@ -52,7 +52,7 @@ const config = {
     new HtmlWebpackPlugin({
       inject: true,
       hash: true,
-      template: "./src/assets/index.html",
+      template: isProdMode ? "./src/assets/index.prod.html": "./src/assets/index.html",
       filename: "index.html"
     }),
     new MiniCssExtractPlugin({
