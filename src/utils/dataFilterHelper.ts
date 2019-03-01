@@ -10,7 +10,6 @@ export const filteredData = (res: any) => {
   const imageData: ImageData = dataWithImages.map(
     (item: any): ImageData => {
       let dimension = { height: 0, width: 0 }
-      console.log("item.data: ", item.data)
       const resolutionLength = item.data.preview.images[0].resolutions.length
       let urlOfLowerResolution = ""
 
