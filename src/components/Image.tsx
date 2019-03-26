@@ -1,11 +1,11 @@
 import classNames from "classNames"
 import * as React from "react"
 
-import { CustomPhotoProps } from "./GalleryContainer"
+import { ImageData } from "./GalleryContainer"
 
 interface Props {
   readonly index: number
-  readonly photo: CustomPhotoProps
+  readonly photo: ImageData
   readonly onClick: (index: number) => void
 }
 interface State {

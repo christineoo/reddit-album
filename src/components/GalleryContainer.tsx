@@ -2,7 +2,7 @@ import { RouteComponentProps } from "@reach/router"
 import * as React from "react"
 import Lightbox from "react-images"
 import ReactLoading from "react-loading"
-import Gallery, { GalleryProps, PhotoProps } from "react-photo-gallery"
+import Gallery, { PhotoProps } from "react-photo-gallery"
 
 import { NotFound } from "../App"
 import RedditServices from "../services/RedditServices"
@@ -33,10 +33,6 @@ interface State {
   readonly isFetchingMoreData: boolean
   readonly lightboxIsOpen: boolean
   readonly isValidSubreddit: boolean
-}
-
-export interface CustomPhotoProps extends PhotoProps {
-  readonly title: string
 }
 
 class GalleryContainer extends React.Component<Props> {
@@ -187,13 +183,14 @@ class GalleryContainer extends React.Component<Props> {
     }
 
     // src is from a lower resolution image
-    const photos = data.map((d: ImageData, index: number) => {
-      return { caption: d.title, height: d.height, src: d.url, title: d.title, width: d.width, key: index }
+    // tslint:disable-next-line:readonly-array
+    const photos: Array<PhotoProps<{ readonly title: string }>> = data.map((d: ImageData, index: number) => {
+      return { height: d.height, src: d.url, title: d.title, width: d.width, key: `${index}` }
     })
 
     // src is from a higher resolution image
-    const images = data.map((d: ImageData, index: number) => {
-      return { caption: d.title, height: d.height, src: d.src, title: d.title, width: d.width, key: index }
+    const images = data.map((d: ImageData) => {
+      return { caption: d.title, src: d.src }
     })
 
     return (
