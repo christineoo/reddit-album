@@ -68,7 +68,7 @@
     "normalize.css": "^8.0.1",
     "reach-router-hash-history": "^0.0.3",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react-dom": "^16.8.6",
     "react-error-boundary": "^1.2.3",
     "react-images": "^0.5.19",
     "react-loading": "^2.0.3",
