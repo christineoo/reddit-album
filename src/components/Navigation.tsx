@@ -1,5 +1,5 @@
 import { Link } from "@reach/router"
-import classNames from "classNames"
+import classNames from "classnames"
 import * as React from "react"
 
 interface Props {
