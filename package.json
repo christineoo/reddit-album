@@ -31,7 +31,7 @@
     "@types/lodash-es": "^4.17.3",
     "@types/node": "^11.13.7",
     "@types/reach__router": "^1.2.4",
-    "@types/react": "^16.8.10",
+    "@types/react": "^16.9.1",
     "@types/react-dom": "^16.8.3",
     "@types/react-images": "^0.5.1",
     "@types/webpack": "^4.4.27",
