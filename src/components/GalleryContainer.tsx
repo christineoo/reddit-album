@@ -206,7 +206,7 @@ class GalleryContainer extends React.Component<Props> {
           </div>
         ) : (
           <>
-            <Gallery photos={photos} ImageComponent={this.renderImageComponent} />
+            <Gallery photos={photos} renderImage={this.renderImageComponent} />
             <Lightbox
               backdropClosesModal={true}
               currentImage={currentImage}
