@@ -32,7 +32,7 @@
     "@types/node": "^11.13.7",
     "@types/reach__router": "^1.2.4",
     "@types/react": "^16.9.2",
-    "@types/react-dom": "^16.8.3",
+    "@types/react-dom": "^16.9.0",
     "@types/react-images": "^0.5.1",
     "@types/webpack": "^4.4.27",
     "@types/webpack-dev-server": "^3.1.5",
