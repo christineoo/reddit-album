@@ -18,7 +18,7 @@ const GalleryContainer = ({ subreddit }: Props) => {
 
   const { data, after, isLoading, isLoadingMore, setPath } = useRedditApi(subreddit)
 
-  const validateAndSetSubreddit = (subreddit? :string) => {
+  const validateAndSetSubreddit = (subreddit?: string) => {
     const isValidSubreddit = !!SUBREDDITS.find((sub) => sub.value === subreddit)
     setIsValidSubreddit(isValidSubreddit)
   }
@@ -52,7 +52,7 @@ const GalleryContainer = ({ subreddit }: Props) => {
     return () => window.removeEventListener('scroll', handleScroll);
   });
 
-  const handleScroll = async () => {
+  const handleScroll = () => {
     if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
 
     if (!isLoadingMore) {
