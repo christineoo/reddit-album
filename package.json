@@ -24,7 +24,8 @@
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint --fix './src/**/*.{ts,tsx}'",
     "typecheck": "yarn tsc --noEmit",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "prettier:fix": "prettier --write \"src/**/*.{ts,tsx,scss}\""
   },
   "devDependencies": {
     "@types/classnames": "^2.2.6",

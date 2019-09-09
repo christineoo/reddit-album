@@ -15,8 +15,8 @@ interface Props {
 
 type ImageStatus = "loading" | "loaded" | "error"
 
-const Image = ({photo, index, onClick}: Props) => {
-  const [imageStatus, setImageStatus] = React.useState<ImageStatus>('loading')
+const Image = ({ photo, index, onClick }: Props) => {
+  const [imageStatus, setImageStatus] = React.useState<ImageStatus>("loading")
 
     const img = photo as PhotoType
 
@@ -39,4 +39,4 @@ const Image = ({photo, index, onClick}: Props) => {
   )
 }
 
-export default Image;
+export default Image
