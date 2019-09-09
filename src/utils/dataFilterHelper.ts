@@ -1,13 +1,12 @@
 import { pick } from "lodash-es"
-
-import { ImageData } from "../components/GalleryContainer"
+import { ImageData } from "../services/useRedditApi"
 
 export const filteredData = (res: any) => {
   const dataWithImages = res.filter(
     (child: any) => child.data.url.match(/\.(jpeg|jpg|gif|png)$/) != null && !!child.data.preview
   )
 
-  const imageData: ImageData = dataWithImages.map(
+  const imageData: ImageData[] = dataWithImages.map(
     (item: any): ImageData => {
       let dimension = { height: 0, width: 0 }
       const resolutionLength = item.data.preview.images[0].resolutions.length
@@ -31,7 +30,7 @@ export const filteredData = (res: any) => {
       const validLowerResUrl = urlOfLowerResolution.replace(regex, "")
 
       return {
-        ...pick(item.data, "name", "author", "title"),
+        ...pick(item.data, "name", "title"),
         height: dimension.height,
         src: item.data.url,
         url: validLowerResUrl,

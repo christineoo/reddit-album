@@ -1,51 +1,34 @@
 import classNames from "classnames"
 import * as React from "react"
-
-import { ImageData } from "./GalleryContainer"
+import { ImageData } from "../services/useRedditApi"
 
 interface Props {
   readonly index: number
   readonly photo: ImageData
   readonly onClick: (index: number) => void
 }
-interface State {
-  readonly imageStatus: "loading" | "loaded" | "error"
-}
 
-class Image extends React.Component<Props, State> {
-  readonly state: State = {
-    imageStatus: "loading"
-  }
+type ImageStatus = "loading" | "loaded" | "error"
 
-  readonly handleImageLoaded = () => {
-    this.setState({ imageStatus: "loaded" })
-  }
+const Image = ({photo, index, onClick}: Props) => {
+  const [imageStatus, setImageStatus] = React.useState<ImageStatus>('loading')
 
-  readonly handleImageError = () => {
-    this.setState({ imageStatus: "error" })
-  }
+  const imgContainerClass = classNames({
+    "img-container": true,
+    "load-error": imageStatus === "error",
+    loaded: imageStatus === "loaded"
+  })
 
-  render() {
-    const { index, photo } = this.props
-    const { imageStatus } = this.state
-
-    const imgContainerClass = classNames({
-      "img-container": true,
-      "load-error": imageStatus === "error",
-      loaded: imageStatus === "loaded"
-    })
-
-    return (
-      <div className={imgContainerClass} onClick={() => this.props.onClick(index)}>
-        <div className="content">
-          <img {...photo} onLoad={this.handleImageLoaded} onError={this.handleImageError} />
-          <div className="content-details">
-            <span>{photo.title}</span>
-          </div>
+  return (
+    <div className={imgContainerClass} onClick={() => onClick(index)}>
+      <div className="content">
+        <img {...photo} onLoad={() => setImageStatus('loaded')} onError={() => setImageStatus('error')} />
+        <div className="content-details">
+          <span>{photo.title}</span>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
-export default Image
+export default Image;
