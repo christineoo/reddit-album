@@ -10,8 +10,8 @@ interface Props {
 
 type ImageStatus = "loading" | "loaded" | "error"
 
-const Image = ({photo, index, onClick}: Props) => {
-  const [imageStatus, setImageStatus] = React.useState<ImageStatus>('loading')
+const Image = ({ photo, index, onClick }: Props) => {
+  const [imageStatus, setImageStatus] = React.useState<ImageStatus>("loading")
 
   const imgContainerClass = classNames({
     "img-container": true,
@@ -22,7 +22,7 @@ const Image = ({photo, index, onClick}: Props) => {
   return (
     <div className={imgContainerClass} onClick={() => onClick(index)}>
       <div className="content">
-        <img {...photo} onLoad={() => setImageStatus('loaded')} onError={() => setImageStatus('error')} />
+        <img {...photo} onLoad={() => setImageStatus("loaded")} onError={() => setImageStatus("error")} />
         <div className="content-details">
           <span>{photo.title}</span>
         </div>
@@ -31,4 +31,4 @@ const Image = ({photo, index, onClick}: Props) => {
   )
 }
 
-export default Image;
+export default Image

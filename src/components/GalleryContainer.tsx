@@ -5,7 +5,7 @@ import Gallery from "react-photo-gallery"
 import Image from "./Image"
 import Lightbox from "react-images"
 import LoadingBar from "./LoadingBar"
-import { NotFound } from "../App";
+import { NotFound } from "../App"
 import { useRedditApi, ImageData } from "../services/useRedditApi"
 
 type Props = RouteComponentProps<{ readonly subreddit: string }>
@@ -25,11 +25,11 @@ const GalleryContainer = ({ subreddit }: Props) => {
 
   React.useEffect(() => {
     validateAndSetSubreddit(subreddit)
-    const path = subreddit ? `/r/${subreddit}.json` : '/r/itookapicture.json'
+    const path = subreddit ? `/r/${subreddit}.json` : "/r/itookapicture.json"
     setPath(path)
     // Reset the images to [] when a different subreddit is selected
     setImages([])
-  }, [subreddit]);
+  }, [subreddit])
 
   React.useEffect(() => {
     if (!isLoading && data && data !== imagesData) {
@@ -39,7 +39,6 @@ const GalleryContainer = ({ subreddit }: Props) => {
 
   React.useEffect(() => {
     if (!isLoadingMore && data && data !== imagesData) {
-
       setImages((prevState: ImageData[]) => {
         return prevState.concat(data)
       })
@@ -48,15 +47,15 @@ const GalleryContainer = ({ subreddit }: Props) => {
 
   // add/remove scroll listener to auto load more images
   React.useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  });
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  })
 
   const handleScroll = () => {
-    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return
 
     if (!isLoadingMore) {
-      const path = subreddit && after ? `/r/${subreddit}.json?after=${after}` : '/r/itookapicture.json'
+      const path = subreddit && after ? `/r/${subreddit}.json?after=${after}` : "/r/itookapicture.json"
 
       setPath(path)
     }
@@ -86,12 +85,16 @@ const GalleryContainer = ({ subreddit }: Props) => {
   }
 
   const renderImageComponent = (props: any) => {
-    return <Image key={props.index} photo={props.photo} index={props.index} onClick={() => handleOnClick(props.index)} />
+    return (
+      <Image key={props.index} photo={props.photo} index={props.index} onClick={() => handleOnClick(props.index)} />
+    )
   }
 
-  const images = imagesData ? imagesData.map((d: ImageData) => {
-    return { caption: d.title, src: d.src }
-  }) : []
+  const images = imagesData
+    ? imagesData.map((d: ImageData) => {
+        return { caption: d.title, src: d.src }
+      })
+    : []
 
   if (!isValidSubreddit && !!imagesData) {
     return <NotFound />
@@ -101,20 +104,24 @@ const GalleryContainer = ({ subreddit }: Props) => {
     <div className="gallery">
       <Navigation />
       {isLoading && <LoadingBar />}
-      {!isLoading && imagesData && imagesData.length === 0 && <div className="centered-container"><h1>No photos yet 🏖️</h1></div>
-      }
-      {!isLoading && imagesData &&
-        <Gallery photos={imagesData} renderImage={renderImageComponent} />}
-      {!isLoading && <Lightbox
-        backdropClosesModal={true}
-        currentImage={currentImage}
-        images={images}
-        isOpen={lightboxIsOpen}
-        onClickPrev={gotoPrevious}
-        onClickNext={gotoNext}
-        onClose={closeLightbox}
-        spinner={LoadingBar}
-      />}
+      {!isLoading && imagesData && imagesData.length === 0 && (
+        <div className="centered-container">
+          <h1>No photos yet 🏖️</h1>
+        </div>
+      )}
+      {!isLoading && imagesData && <Gallery photos={imagesData} renderImage={renderImageComponent} />}
+      {!isLoading && (
+        <Lightbox
+          backdropClosesModal={true}
+          currentImage={currentImage}
+          images={images}
+          isOpen={lightboxIsOpen}
+          onClickPrev={gotoPrevious}
+          onClickNext={gotoNext}
+          onClose={closeLightbox}
+          spinner={LoadingBar}
+        />
+      )}
     </div>
   )
 }

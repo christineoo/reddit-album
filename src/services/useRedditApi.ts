@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { filteredData } from "../utils/dataFilterHelper";
+import { filteredData } from "../utils/dataFilterHelper"
 
 export interface ImageData {
   height: number
@@ -9,24 +9,21 @@ export interface ImageData {
   width: number
 }
 
-
 export const useRedditApi = (subreddit: string | undefined) => {
   const ROOT_PATH = "https://www.reddit.com"
 
-  const [after, setAfter] = useState('')
+  const [after, setAfter] = useState("")
   const [data, setData] = useState<ImageData[]>()
-  const [path, setPath] = useState(subreddit ? `/r/${subreddit}.json` :
-  `/r/itookapicture.json`,
-);
+  const [path, setPath] = useState(subreddit ? `/r/${subreddit}.json` : `/r/itookapicture.json`)
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [isError, setIsError] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsError(false);
+      setIsError(false)
       const regexp = /\bafter/g
-      const isLoadingMore = regexp.test(path);
+      const isLoadingMore = regexp.test(path)
 
       if (isLoadingMore) {
         setIsLoadingMore(true)
@@ -35,27 +32,27 @@ export const useRedditApi = (subreddit: string | undefined) => {
       }
 
       try {
-        const response = await fetch(`${ROOT_PATH}${path}`);
+        const response = await fetch(`${ROOT_PATH}${path}`)
         if (!response.ok) {
           throw Error("fetch error")
         }
         const json = await response.json()
         const imageData = filteredData(json.data.children)
 
-        setData(imageData);
-        setAfter(json.data.after);
+        setData(imageData)
+        setAfter(json.data.after)
       } catch (error) {
-        setIsError(true);
+        setIsError(true)
       }
       if (isLoadingMore) {
         setIsLoadingMore(false)
       } else {
         setIsLoading(false)
       }
-    };
+    }
 
-    fetchData();
-  }, [path]);
+    fetchData()
+  }, [path])
 
   return { data, after, isLoading, isLoadingMore, setPath }
 }
