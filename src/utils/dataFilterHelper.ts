@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { pick } from "lodash-es"
-
-import { ImageData } from "../components/GalleryContainer"
+import { ImageData } from "../services/useRedditApi"
 
 export const filteredData = (res: any) => {
   const dataWithImages = res.filter(
@@ -32,7 +31,7 @@ export const filteredData = (res: any) => {
       const validLowerResUrl = urlOfLowerResolution.replace(regex, "")
 
       return {
-        ...pick(item.data, "name", "author", "title"),
+        ...pick(item.data, "name", "title"),
         height: dimension.height,
         url: item.data.url,
         src: validLowerResUrl,

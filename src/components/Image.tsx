@@ -12,26 +12,11 @@ interface Props {
   readonly photo: PhotoProps
   readonly onClick: (index: number) => void
 }
-interface State {
-  readonly imageStatus: "loading" | "loaded" | "error"
-}
 
-class Image extends React.Component<Props, State> {
-  readonly state: State = {
-    imageStatus: "loading"
-  }
+type ImageStatus = "loading" | "loaded" | "error"
 
-  readonly handleImageLoaded = () => {
-    this.setState({ imageStatus: "loaded" })
-  }
-
-  readonly handleImageError = () => {
-    this.setState({ imageStatus: "error" })
-  }
-
-  render() {
-    const { index, photo } = this.props
-    const { imageStatus } = this.state
+const Image = ({photo, index, onClick}: Props) => {
+  const [imageStatus, setImageStatus] = React.useState<ImageStatus>('loading')
 
     const img = photo as PhotoType
 
@@ -50,8 +35,8 @@ class Image extends React.Component<Props, State> {
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
-export default Image
+export default Image;
