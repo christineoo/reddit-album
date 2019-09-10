@@ -4,7 +4,7 @@ import Navigation, { SUBREDDITS } from "./Navigation"
 import Gallery from "react-photo-gallery"
 import Image from "./Image"
 import Lightbox from "react-images"
-import LoadingBar from "./LoadingBar"
+import LoadingBars from "./LoadingBars"
 import { NotFound } from "../App"
 import { useRedditApi, ImageData } from "../services/useRedditApi"
 
@@ -103,7 +103,7 @@ const GalleryContainer = ({ subreddit }: Props) => {
   return (
     <div className="gallery">
       <Navigation />
-      {isLoading && <LoadingBar />}
+      {isLoading && <LoadingBars />}
       {!isLoading && imagesData && imagesData.length === 0 && (
         <div className="centered-container">
           <h1>No photos yet 🏖️</h1>
@@ -119,7 +119,7 @@ const GalleryContainer = ({ subreddit }: Props) => {
           onClickPrev={gotoPrevious}
           onClickNext={gotoNext}
           onClose={closeLightbox}
-          spinner={LoadingBar}
+          spinner={LoadingBars}
         />
       )}
     </div>
