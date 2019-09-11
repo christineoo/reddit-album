@@ -73,7 +73,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-error-boundary": "^1.2.5",
-    "react-images": "^0.5.19",
+    "react-images": "^1.0.0",
     "react-loading": "^2.0.3",
     "react-photo-gallery": "^8.0.0"
   },
