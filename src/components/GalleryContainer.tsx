@@ -79,15 +79,13 @@ const GalleryContainer = ({ subreddit }: Props) => {
     setCurrentImage(currentImage + 1)
   }
 
-  const handleOnClick = (index: number) => {
+  const openLightbox = React.useCallback((index) => {
     setLightboxIsOpen(true)
     setCurrentImage(index)
-  }
+  }, [])
 
   const renderImageComponent = (props: any) => {
-    return (
-      <Image key={props.index} photo={props.photo} index={props.index} onClick={() => handleOnClick(props.index)} />
-    )
+    return <Image key={props.index} photo={props.photo} index={props.index} onClick={openLightbox} />
   }
 
   const images = imagesData
