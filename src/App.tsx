@@ -9,9 +9,9 @@ import "./styles.scss"
 type Props = RouteComponentProps
 
 const HomeLink = () => <Link to={"/r/itookapicture"}>Back to Photography</Link>
-export const NotFound = ({  }: Props) => (
+export const NotFound = (_: Props) => (
   <div className="centered-container">
-    <h1>The page you're looking for doesn't seem to exist 🦄</h1>
+    <h1>The page you&apos;re looking for doesn&apos;t seem to exist 🦄</h1>
     <HomeLink />
   </div>
 )

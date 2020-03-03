@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { pick } from "lodash-es"
 
 import { ImageData } from "../components/GalleryContainer"

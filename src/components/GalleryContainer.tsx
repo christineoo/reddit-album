@@ -170,6 +170,7 @@ class GalleryContainer extends React.Component<Props> {
     this.setState({ lightboxIsOpen: false })
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly renderImageComponent = (props: any) => {
     return <Image key={props.index} photo={props.photo} index={props.index} onClick={this.handleOnClick} />
   }
