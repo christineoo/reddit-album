@@ -8,11 +8,11 @@ const options = {
   host: "localhost",
   historyApiFallback: true,
   overlay: true
-};
+}
 
-webpackDevServer.addDevServerEntrypoints(config, options);
-const compiler = webpack(config);
-const server = new webpackDevServer(compiler, options);
+webpackDevServer.addDevServerEntrypoints(config, options)
+const compiler = webpack(config)
+const server = new webpackDevServer(compiler, options)
 
 server.listen(9000, "localhost", () => {
   console.log("dev server listening on port 9000")
