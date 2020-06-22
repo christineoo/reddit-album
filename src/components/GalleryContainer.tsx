@@ -119,7 +119,6 @@ const GalleryContainer = ({ subreddit }: Props) => {
                 caption: i.title,
                 src: i.url
               }))}
-              spinner={LoadingBars}
             />
           </Modal>
         ) : null}
