@@ -16,6 +16,13 @@ export const NotFound = (_: Props) => (
   </div>
 )
 
+export const ErrorPage = (_: Props) => (
+  <div className="centered-container">
+    <h1>uh oh, something unexpected happened 🌈🦄</h1>
+    <HomeLink />
+  </div>
+)
+
 const ErrorBoundaryFallbackComponent = ({ componentStack, error }: FallbackProps) => (
   <div className="centered-container">
     <h1>Oops! An error occurred!</h1>

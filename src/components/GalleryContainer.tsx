@@ -1,15 +1,18 @@
 import { RouteComponentProps } from "@reach/router"
 import * as React from "react"
-import Gallery from "react-photo-gallery"
+import Gallery, { RenderImageProps, PhotoProps } from "react-photo-gallery"
+import Carousel, { Modal, ModalGateway } from "react-images"
 
 import Image from "./Image"
 import Navigation, { SUBREDDITS } from "./Navigation"
-import { filteredData } from "../utils/dataFilterHelper"
 import LoadingBars from "./LoadingBars"
+import { ErrorPage, NotFound } from "../App"
+
+import { filteredData } from "../utils/dataFilterHelper"
 import useInfiniteScroll from "./useInfiniteScroll"
-import { NotFound } from "../App"
 
 type Props = RouteComponentProps<{ readonly subreddit: string }>
+type CustomPhotoProps = PhotoProps<{ title: string; url: string }>
 
 export interface ImageData {
   readonly author: string
@@ -18,13 +21,17 @@ export interface ImageData {
   readonly title: string
   readonly url: string
   readonly width: number
+  readonly alt: string
 }
 
 const GalleryContainer = ({ subreddit }: Props) => {
-  const [data, setData] = React.useState()
+  const [data, setData] = React.useState<CustomPhotoProps[]>([])
   const [isLoading, setIsLoading] = React.useState(false)
   const [after, setAfter] = React.useState("")
   const [isValidSubreddit, setIsValidSubreddit] = React.useState(false)
+  const [lightboxIsOpen, setLightboxIsOpen] = React.useState(false)
+  const [currentImage, setCurrentImage] = React.useState(0)
+  const [isError, setIsError] = React.useState(false)
 
   const validateSubreddit = React.useCallback(() => {
     const isValidSubreddit = !!SUBREDDITS.find((sub) => sub.value === subreddit)
@@ -35,14 +42,21 @@ const GalleryContainer = ({ subreddit }: Props) => {
   const { setIsFetchingMore } = useInfiniteScroll(async () => {
     if (subreddit && validateSubreddit()) {
       setIsFetchingMore(true)
-      const result = await fetch(`https://www.reddit.com/r/${subreddit}.json?after=${after}`)
-      const json = await result.json()
-      setIsFetchingMore(false)
-      const imageData = filteredData(json.data.children)
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      setData((prev: any) => prev.concat(imageData))
-      setAfter(json.data.after)
+      try {
+        const result = await fetch(`https://www.reddit.com/r/${subreddit}.json?after=${after}`)
+        if (!result.ok) {
+          throw Error("fetch error")
+        }
+        const json = await result.json()
+        setIsFetchingMore(false)
+        const imageData = filteredData(json.data.children)
+
+        setData((prev) => prev.concat(imageData))
+        setAfter(json.data.after)
+      } catch (_error) {
+        setIsError(true)
+      }
     }
   })
 
@@ -62,17 +76,21 @@ const GalleryContainer = ({ subreddit }: Props) => {
     fetchData()
   }, [subreddit, validateSubreddit])
 
-  //  eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const renderImageComponent = (props: any) => {
-    return (
-      <Image
-        key={props.index}
-        photo={props.photo}
-        index={props.index}
-        onClick={() => console.log("index: ", props.index)}
-        //  onClick={() => handleOnClick(props.index)}
-      />
-    )
+  const openLightbox = React.useCallback((index) => {
+    setLightboxIsOpen(true)
+    setCurrentImage(index)
+  }, [])
+
+  const closeLightbox = () => {
+    setLightboxIsOpen(false)
+  }
+
+  const renderImageComponent = (props: RenderImageProps) => {
+    return <Image key={props.index} photo={props.photo} index={props.index} onClick={openLightbox} />
+  }
+
+  if (isError) {
+    return <ErrorPage />
   }
 
   return (
@@ -91,6 +109,21 @@ const GalleryContainer = ({ subreddit }: Props) => {
       ) : (
         <NotFound />
       )}
+      <ModalGateway>
+        {lightboxIsOpen ? (
+          <Modal onClose={closeLightbox}>
+            <Carousel
+              currentIndex={currentImage}
+              views={data.map((i: CustomPhotoProps) => ({
+                ...i,
+                caption: i.title,
+                src: i.url
+              }))}
+              spinner={LoadingBars}
+            />
+          </Modal>
+        ) : null}
+      </ModalGateway>
     </div>
   )
 }

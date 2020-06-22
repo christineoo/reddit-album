@@ -35,7 +35,6 @@
     "@types/reach__router": "^1.2.4",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
-    "@types/react-images": "^0.5.1",
     "@types/webpack": "^4.39.1",
     "@types/webpack-dev-server": "^3.1.5",
     "@typescript-eslint/eslint-plugin": "^2.22.0",
@@ -79,7 +78,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-error-boundary": "^1.2.5",
-    "react-images": "^0.5.19",
+    "react-images": "^1.1.0-beta.3",
     "react-loading": "^2.0.3",
     "react-photo-gallery": "^8.0.0"
   },
