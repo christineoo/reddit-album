@@ -8,7 +8,7 @@ export const filteredData = (res: any) => {
     (child: any) => child.data.url.match(/\.(jpeg|jpg|gif|png)$/) != null && !!child.data.preview
   )
 
-  const imageData: ImageData = dataWithImages.map(
+  const imageData: ImageData[] = dataWithImages.map(
     (item: any): ImageData => {
       let dimension = { height: 0, width: 0 }
       const resolutionLength = item.data.preview.images[0].resolutions.length
@@ -34,9 +34,10 @@ export const filteredData = (res: any) => {
       return {
         ...pick(item.data, "name", "author", "title"),
         height: dimension.height,
-        src: item.data.url,
-        url: validLowerResUrl,
-        width: dimension.width
+        url: item.data.url,
+        src: validLowerResUrl,
+        width: dimension.width,
+        alt: item.data.title
       }
     }
   )

@@ -1,19 +1,27 @@
 import { useState, useEffect } from "react"
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useInfiniteScroll = (callback: any) => {
+const useInfiniteScroll = (callback: () => void) => {
   const [isFetchingMore, setIsFetchingMore] = useState(false)
+  const OFFSET_FROM_BOTTOM = 500
 
   useEffect(() => {
     const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight ||
-        isFetchingMore
-      ) {
-        return
+      const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight
+      const body = document.body
+      const html = document.documentElement
+      const docHeight = Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        html.clientHeight,
+        html.scrollHeight,
+        html.offsetHeight
+      )
+      const windowBottom = windowHeight + window.pageYOffset + OFFSET_FROM_BOTTOM
+      if (windowBottom >= docHeight) {
+        setIsFetchingMore(true)
+      } else {
+        setIsFetchingMore(false)
       }
-
-      setIsFetchingMore(true)
     }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
