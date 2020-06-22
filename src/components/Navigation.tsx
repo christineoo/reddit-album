@@ -14,7 +14,7 @@ interface Option {
 export const SUBREDDITS: ReadonlyArray<Option> = [
   { value: "itookapicture", label: "Photography" },
   { value: "pic", label: "General" },
-  { value: "aww", label: "Aww" },
+  // { value: "aww", label: "Aww" },
   { value: "foodporn", label: "Food" },
   { value: "DessertPorn", label: "Dessert" },
   { value: "cityporn", label: "City" },
@@ -22,6 +22,7 @@ export const SUBREDDITS: ReadonlyArray<Option> = [
   { value: "EarthPorn", label: "Earth" },
   { value: "lakeporn", label: "Lakes" },
   { value: "RoomPorn", label: "Room" },
+  { value: "AbandonedPorn", label: "Abandoned" },
   { value: "waterporn", label: "Water" },
   { value: "WinterPorn", label: "Winter" },
   { value: "ImaginaryLeviathans", label: "Art" }
@@ -42,7 +43,7 @@ const NavLink = (props: Props) => (
 
 const Navigation = () => {
   return (
-    <nav>
+    <nav className="nav-subreddit">
       <ul>
         {SUBREDDITS.map((option) => (
           <li key={option.value}>
