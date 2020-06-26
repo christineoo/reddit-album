@@ -113,6 +113,7 @@ li {
       }
     }
     .content {
+      cursor: pointer;
       &:hover {
         .content-details {
           opacity: 1;
