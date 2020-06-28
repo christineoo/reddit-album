@@ -14,16 +14,6 @@ import useInfiniteScroll from "./useInfiniteScroll"
 type Props = RouteComponentProps<{ readonly subreddit: string }>
 type CustomPhotoProps = PhotoProps<{ title: string; url: string }>
 
-export interface ImageData {
-  readonly author: string
-  readonly height: number
-  readonly src: string
-  readonly title: string
-  readonly url: string
-  readonly width: number
-  readonly alt: string
-}
-
 const GalleryContainer = ({ subreddit }: Props) => {
   const [data, setData] = React.useState<CustomPhotoProps[]>([])
   const [isLoading, setIsLoading] = React.useState(false)

@@ -19,7 +19,7 @@ const Image = ({ photo, index, onClick }: Props) => {
   const [imageStatus, setImageStatus] = React.useState<ImageStatus>("loading")
 
   const img = photo as PhotoType
-  const { url, width, height, alt } = img
+  const { url, width, height, alt, title } = img
 
   const imgContainerClass = classNames({
     "img-container": true,
@@ -40,7 +40,7 @@ const Image = ({ photo, index, onClick }: Props) => {
       <div className="content">
         <img src={url} height={height} width={width} alt={alt} onLoad={handleImageLoaded} onError={handleImageError} />
         <div className="content-details">
-          <span>{photo.alt}</span>
+          <span>{title}</span>
         </div>
       </div>
     </div>

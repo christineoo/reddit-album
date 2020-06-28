@@ -35,8 +35,7 @@ export const filteredData = (res: any) => {
         height: dimension.height,
         url: item.data.url,
         src: validLowerResUrl,
-        width: dimension.width,
-        alt: item.data.title
+        width: dimension.width
       }
     }
   )

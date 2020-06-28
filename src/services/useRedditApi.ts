@@ -7,7 +7,6 @@ export interface ImageData {
   title: string
   url: string
   width: number
-  alt: string
 }
 
 export const useRedditApi = (subreddit: string | undefined) => {
