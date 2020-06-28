@@ -1,5 +1,5 @@
 import * as React from "react"
-import { render, cleanup } from "@testing-library/react"
+import { render, cleanup, screen } from "@testing-library/react"
 import "@testing-library/jest-dom/extend-expect"
 import Image from "../Image"
 
@@ -14,8 +14,8 @@ describe("Image Component", () => {
       title: "I am a title",
       url: "https://image.png"
     }
-    const { getByText } = render(<Image photo={photo} index={0} onClick={jest.fn()} />)
+    render(<Image photo={photo} index={0} onClick={jest.fn()} />)
 
-    expect(getByText(photo.title)).toBeInTheDocument()
+    expect(screen.getByText(photo.title)).toBeInTheDocument()
   })
 })
