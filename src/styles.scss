@@ -123,3 +123,8 @@ li {
     }
   }
 }
+
+// https://github.com/jossmac/react-images/issues/373
+.react-images__view-image {
+  max-height: 100vh !important;
+}
