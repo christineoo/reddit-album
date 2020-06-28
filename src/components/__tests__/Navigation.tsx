@@ -1,5 +1,5 @@
 import * as React from "react"
-import { cleanup, render } from "react-testing-library"
+import { cleanup, render, screen } from "@testing-library/react"
 
 import Navigation, { SUBREDDITS } from "../Navigation"
 
@@ -7,16 +7,16 @@ afterEach(cleanup)
 
 describe("Navigation Component", () => {
   test("value and label of navigation", () => {
-    const { getByTestId } = render(<Navigation />)
+    render(<Navigation />)
     SUBREDDITS.map((subreddit) => {
-      expect(getByTestId(subreddit.value).textContent).toEqual(subreddit.label)
+      expect(screen.getByTestId(subreddit.value).textContent).toEqual(subreddit.label)
     })
   })
 
   test("href value is prefix with `/r/`", () => {
-    const { getByTestId } = render(<Navigation />)
+    render(<Navigation />)
     SUBREDDITS.map((subreddit) => {
-      expect(getByTestId(subreddit.value).getAttribute("href")).toEqual(`/r/${subreddit.value}`)
+      expect(screen.getByTestId(subreddit.value).getAttribute("href")).toEqual(`/r/${subreddit.value}`)
     })
   })
 })
