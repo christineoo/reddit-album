@@ -62,7 +62,7 @@
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
     "ts-jest": "^24.0.2",
-    "ts-loader": "^5.3.1",
+    "ts-loader": "^7.0.5",
     "tslint": "^5.19.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-immutable": "^5.0.1",
@@ -81,7 +81,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-error-boundary": "^1.2.5",
-    "react-images": "^1.0.0",
+    "react-images": "^1.1.7",
     "react-loading": "^2.0.3",
     "react-photo-gallery": "^8.0.0"
   },
