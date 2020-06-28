@@ -65,7 +65,7 @@
     "ts-loader": "^7.0.5",
     "tslint": "^5.19.0",
     "tslint-config-prettier": "^1.18.0",
-    "tslint-immutable": "^5.0.1",
+    "tslint-immutable": "^6.0.1",
     "tslint-react": "^4.0.0",
     "typescript": "^3.6.2",
     "webpack": "^4.39.3",
