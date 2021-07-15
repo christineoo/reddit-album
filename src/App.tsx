@@ -1,7 +1,7 @@
 import { createHistory, Link, LocationProvider, Redirect, RouteComponentProps, Router } from "@reach/router"
 import { createHashSource } from "reach-router-hash-history"
 import * as React from "react"
-import ErrorBoundary, { FallbackProps } from "react-error-boundary"
+import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 
 import GalleryContainer from "./components/GalleryContainer"
 import "./styles.scss"
@@ -23,15 +23,12 @@ export const ErrorPage = (_: Props) => (
   </div>
 )
 
-const ErrorBoundaryFallbackComponent = ({ componentStack, error }: FallbackProps) => (
+const ErrorBoundaryFallbackComponent = ({ error }: FallbackProps) => (
   <div className="centered-container">
-    <h1>Oops! An error occurred!</h1>
+    <h1>Oops, an error occurred!</h1>
     <p>Here’s what we know…</p>
     <p>
-      <strong>Error:</strong> {error && error.toString()}
-    </p>
-    <p>
-      <strong>Stacktrace:</strong> {componentStack}
+      {error && error.toString()}
     </p>
     <HomeLink />
   </div>
