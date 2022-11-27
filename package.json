@@ -13,7 +13,11 @@
     "yarn": ">=1.10"
   },
   "homepage": "https://christineoo.github.io/reddit-album/",
+  "type": "module",
   "scripts": {
+    "build": "vite build",
+    "dev": "vite serve",
+    "preview": "vite preview",
     "clean": "rimraf dist",
     "start": "node server.js",
     "prebuild": "yarn clean",
@@ -42,6 +46,7 @@
     "@types/webpack-dev-server": "^3.1.5",
     "@typescript-eslint/eslint-plugin": "^2.22.0",
     "@typescript-eslint/parser": "^2.22.0",
+    "@vitejs/plugin-react": "^2.2.0",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^3.2.0",
     "eslint": "^6.8.0",
@@ -67,6 +72,8 @@
     "tslint-immutable": "^6.0.1",
     "tslint-react": "^4.0.0",
     "typescript": "^3.6.2",
+    "vite": "^3.2.4",
+    "vite-plugin-html": "^3.2.0",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.8",
     "webpack-dev-server": "^3.2.1"
