@@ -73,10 +73,7 @@
     "tslint-react": "^4.0.0",
     "typescript": "^3.6.2",
     "vite": "^3.2.4",
-    "vite-plugin-html": "^3.2.0",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.8",
-    "webpack-dev-server": "^3.2.1"
+    "vite-plugin-html": "^3.2.0"
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
