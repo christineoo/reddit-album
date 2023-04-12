@@ -34,7 +34,7 @@ const GalleryContainer = ({ subreddit }: Props) => {
       setIsFetchingMore(true)
 
       try {
-        const result = await fetch(`https://www.reddit.com/r/${subreddit}.json?after=${after}`)
+        const result = await fetch(`https://www.reddit.com/r/${subreddit}.json?raw_json=1&after=${after}`)
         if (!result.ok) {
           throw Error("fetch error")
         }
@@ -54,11 +54,12 @@ const GalleryContainer = ({ subreddit }: Props) => {
     const fetchData = async () => {
       if (subreddit && validateSubreddit()) {
         setIsLoading(true)
-        const result = await fetch(`https://www.reddit.com/r/${subreddit}.json`)
+        const result = await fetch(`https://www.reddit.com/r/${subreddit}.json?raw_json=1`)
         const json = await result.json()
+        console.log(json)
         setIsLoading(false)
         const imageData = filteredData(json.data.children)
-
+        console.log(imageData)
         setData(imageData)
         setAfter(json.data.after)
       }

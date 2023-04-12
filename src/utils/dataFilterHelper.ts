@@ -27,14 +27,14 @@ export const filteredData = (res: any) => {
         urlOfLowerResolution = item.data.preview.images[0].resolutions[resolutionLength - 1].url
       }
 
-      const regex = /amp;/g
-      const validLowerResUrl = urlOfLowerResolution.replace(regex, "")
+      // const regex = /amp;/g
+      // const validLowerResUrl = urlOfLowerResolution.replace(regex, "")
 
       return {
         ...pick(item.data, "name", "title"),
         height: dimension.height,
         url: item.data.url,
-        src: validLowerResUrl,
+        src: urlOfLowerResolution,
         width: dimension.width
       }
     }
