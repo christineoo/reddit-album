@@ -56,10 +56,8 @@ const GalleryContainer = ({ subreddit }: Props) => {
         setIsLoading(true)
         const result = await fetch(`https://www.reddit.com/r/${subreddit}.json?raw_json=1`)
         const json = await result.json()
-        console.log(json)
         setIsLoading(false)
         const imageData = filteredData(json.data.children)
-        console.log(imageData)
         setData(imageData)
         setAfter(json.data.after)
       }
