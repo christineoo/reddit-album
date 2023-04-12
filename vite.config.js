@@ -6,7 +6,10 @@ export default defineConfig({
   root: "src",
   build: {
     // Relative to the root
-    outDir: "../dist"
+    outDir: "../dist",
+    commonjsOptions: {
+      transformMixedEsModules: true
+    }
   },
   plugins: [
     // createHtmlPlugin({
